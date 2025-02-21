@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="utf-8" />
+        <!--In the <head>-->
+        <script src="https://cdn.jsdelivr.net/gh/WebCoder49/code-input@2.3/code-input.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/WebCoder49/code-input@2.3/code-input.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+        <!-- and it's easy to individually load additional languages -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/ocaml.min.js"></script>
+    </head>
+    <body>
+        <script>
+         codeInput.registerTemplate("syntax-highlighted", codeInput.templates.hljs(hljs, [] /* Array of plugins (see below) */));
+        </script>
+
+        <code-input id="editor" language="ocaml">(** A style property has a name a value *)
+type property = { name : string; mutable v : int }
+let top = { name = "top"; v = 0}
+let left = { name = "left"; v = 0}
+
+(** Setting a property *)
+let set prop new_value =
+  Format.printf "Setting %s from %d to %d\n" prop.name   prop.v new_value;
+  prop.v <- new_value</code-input>
+        <!-- <input type="button" id="execute" value="Click" /> -->
+        <!-- <pre><code id="types"></code></pre>
+             <pre><code id="output"></code></pre> -->
+
+            <code-input id="editor" language="ocaml">(** An undo-able value is a value, and a function to revert the side-effects of
+                its computation *)
+                type 'a undoable = 'a * (unit -> unit)
+
+                (** Helper to create an undo-able value, with a default undo *)
+                let return ?(undo = fun () -> ()) v : 'a undoable = (v, undo)
+
+                (** A function to set a style in an undo-able way *)
+                let set_u prop new_value =
+                let old_value = prop.v in
+                let () = set prop new_value in
+                let undo () = set prop old_value in
+                return ~undo ()</code-input>
+
+        <script src="blog.js"></script>
+    </body>
+</html>

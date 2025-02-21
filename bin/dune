@@ -1,0 +1,12 @@
+(executable
+ (modes js)
+ (name main)
+ (libraries js_of_ocaml-toplevel js_of_ocaml blog_toplevel brr)
+ (js_of_ocaml
+  (flags
+   (:standard
+    --toplevel))))
+
+(rule
+ (mode promote)
+ (action (copy main.bc.js blog.js)))
