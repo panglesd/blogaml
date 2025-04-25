@@ -60,6 +60,15 @@ let do_ code exec_previous =
   let _unlistener =
     Brr.Ev.listen Brr.Ev.click
       (fun _ev ->
+    Brr.El.set_class
+      (Jstr.v "start-animation")
+      (false)
+      code;
+    let _ = Brr.G.set_timeout ~ms:0 (fun _ ->     Brr.El.set_class
+      (Jstr.v "start-animation")
+      (true)
+      code)
+    in
         let code = Brr.El.to_jv code in
         let textarea = Jv.get code "textareaElement" in
         Jv.set textarea "value" initial_content;
@@ -77,9 +86,27 @@ let do_ code exec_previous =
       (String.length values = 0)
       pretypes;
     Brr.El.set_class
+      (Jstr.v "start-animation")
+      (false)
+      pretypes;
+    let _ = Brr.G.set_timeout ~ms:0 (fun _ ->     Brr.El.set_class
+      (Jstr.v "start-animation")
+      (true)
+      pretypes)
+    in
+    Brr.El.set_class
       (Jstr.v "no-types-defined")
       (String.length (Jstr.to_string !stdouts) = 0)
       preoutput;
+    Brr.El.set_class
+      (Jstr.v "start-animation")
+      (false)
+      preoutput;
+    let _ = Brr.G.set_timeout ~ms:0 (fun _ ->     Brr.El.set_class
+      (Jstr.v "start-animation")
+      (true)
+      preoutput)
+    in
     Brr.El.set_at (Jstr.v "data-highlighted") None types;
     ignore
     @@ Jv.call (Jv.get Jv.global "hljs") "highlightElement"

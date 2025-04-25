@@ -11,6 +11,62 @@
 
         <!-- and it's easy to individually load additional languages -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/ocaml.min.js"></script>
+        <style>
+          /* .start-animation { */
+  /*               animation: bounce 3s ease-in-out infinite; */
+  /*         } */
+  /*         @keyframes bounce { */
+  /* 0% { left: 0; } */
+  /* 50% { left: calc( 100% - 50px ); } */
+  /* 100% { left: 0; } */
+  /*         } */
+
+          .start-animation {
+    animation: flash 1s linear;
+}
+
+@keyframes opacityMask {
+    0% {
+        -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0) 100%);
+        mask-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0) 100%);
+    }
+    50% {
+        -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 100%);
+        mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 100%);
+    }
+    100% {
+        -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 100%);
+        mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 100%);
+    }
+}
+
+          
+/* Shake Animation */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-5px); }
+    40% { transform: translateX(5px); }
+    60% { transform: translateX(-5px); }
+    80% { transform: translateX(5px); }
+    100% { transform: translateX(0); }
+}
+
+/* Flash Animation */
+@keyframes flash {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* Classes to trigger animations */
+.shake {
+    animation: shake 0.4s ease-in-out;
+}
+
+.flash {
+    animation: flash 0.2s ease-in-out;
+}
+
+        </style>
     </head>
     <body>
         <script>
